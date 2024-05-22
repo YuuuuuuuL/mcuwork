@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  mmocr:
+    build: ./mmocr/docker
+    container_name: mmocr
+    command: tail -f /dev/null
+    shm_size: 8g
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    volumes:
+      # - ./data:/mmocr
+      - ./mmocr:/mmocr
